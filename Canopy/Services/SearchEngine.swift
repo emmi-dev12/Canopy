@@ -36,7 +36,9 @@ final class SearchEngine: ObservableObject {
 
     // MARK: - Search
 
-    /// Returns up to (5 apps + 5 actions + 3 folders) ranked results.
+    /// Returns ranked results.
+    /// - Action-intent queries ("wifi off", "bt on") put action results FIRST.
+    /// - Apps that matched but had no actions get a `.reveal` fallback injected.
     /// Must be called on the main thread.
     func search(query: String) -> [SearchResult] {
         if query.isEmpty {
@@ -46,16 +48,29 @@ final class SearchEngine: ObservableObject {
         let q = query.trimmingCharacters(in: .whitespaces)
         guard !q.isEmpty else { return topResults(limit: 8) }
 
-        let appResults = scoredApps(for: q)
+        let appResults   = scoredApps(for: q)
         let actionResults = scoredActions(for: q)
         let folderResults = scoredFolders(for: q)
+        let revealResults = revealFallbacks(appResults: appResults, actionResults: actionResults)
+
+        // When the query looks like a direct intent ("wifi off"), surface actions first
+        let actionFirst = isActionIntent(q) && !actionResults.isEmpty
 
         var results: [SearchResult] = []
-        results += appResults.prefix(5)
-        results += actionResults.prefix(5)
+        if actionFirst {
+            results += actionResults.prefix(5)
+            results += appResults.prefix(3)
+        } else {
+            results += appResults.prefix(5)
+            results += actionResults.prefix(5)
+        }
         results += folderResults.prefix(3)
+        results += revealResults   // always at the end — they're a last resort
 
-        return results.sorted { $0.score > $1.score }
+        // Re-sort within the assembled list but preserve action-first intent weighting
+        return actionFirst
+            ? results   // order already prioritised above
+            : results.sorted { $0.score > $1.score }
     }
 
     // MARK: - Smart suggestions (empty query)
@@ -108,6 +123,50 @@ final class SearchEngine: ObservableObject {
             return .folder(scored)
         }
         .sorted { $0.score > $1.score }
+    }
+
+    // MARK: - Action intent detection
+
+    /// Returns true when the query looks like the user wants to trigger an action rather
+    /// than find an app. Used to flip the result ordering so actions appear first.
+    private func isActionIntent(_ query: String) -> Bool {
+        let q = query.lowercased()
+        let actionTriggers = [
+            "on", "off", "enable", "disable", "toggle",
+            "turn on", "turn off", "open", "close", "quit",
+            "connect", "disconnect", "pause", "resume",
+            "mute", "unmute", "start", "stop", "show", "hide",
+            "restart", "reboot", "lock", "sleep",
+        ]
+        return actionTriggers.contains(where: { q.contains($0) })
+    }
+
+    // MARK: - Reveal fallback injection
+
+    /// For each top-scoring app that has no matching actions in the result set,
+    /// injects a `.reveal(app)` result so there's always something useful to do.
+    /// Only injected for apps whose AX enumeration has already run (to avoid
+    /// premature fallbacks during the initial background scan).
+    private func revealFallbacks(
+        appResults: [SearchResult],
+        actionResults: [SearchResult]
+    ) -> [SearchResult] {
+        // Collect bundle IDs that already have action results
+        let coveredBundleIDs = Set(actionResults.compactMap { result -> String? in
+            if case .action(_, let owner) = result { return owner.bundleIdentifier }
+            return nil
+        })
+
+        return appResults.prefix(3).compactMap { result -> SearchResult? in
+            guard case .app(let app) = result else { return nil }
+            // Only inject reveal if:
+            // 1. This app has no actions in the current result set
+            // 2. AX enumeration has completed for this app (avoid flicker during initial scan)
+            let hasBeenEnumerated = enumeratedApps.contains(app.bundleIdentifier)
+            let hasCoveredActions = coveredBundleIDs.contains(app.bundleIdentifier)
+            guard hasBeenEnumerated && !hasCoveredActions else { return nil }
+            return .reveal(app)
+        }
     }
 
     // MARK: - Background AX enumeration

@@ -64,6 +64,8 @@ final class OverlayViewModel: ObservableObject {
                     return folder.memberBundleIDs.contains(owner.bundleIdentifier)
                 case .folder:
                     return false
+                case .reveal(let app):
+                    return folder.memberBundleIDs.contains(app.bundleIdentifier)
                 }
             }
         }
@@ -115,9 +117,15 @@ final class OverlayViewModel: ObservableObject {
 
         case .folder(let folder):
             rankingService.recordUse(key: "folder::\(folder.id.uuidString)", query: query)
-            // Drill into folder view
             activeFolderFilter = folder
             query = ""
+
+        case .reveal(let app):
+            // Graceful fallback: bring the app's menubar item to focus so the user can
+            // interact with it directly. Still useful even when AX didn't find actions.
+            rankingService.recordUse(key: "reveal::\(app.bundleIdentifier)", query: query)
+            launchApp(app)
+            onDismiss?()
         }
     }
 

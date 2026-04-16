@@ -102,6 +102,9 @@ struct OverlayView: View {
                     let folderResults = viewModel.results.filter {
                         if case .folder = $0 { return true }; return false
                     }
+                    let revealResults = viewModel.results.filter {
+                        if case .reveal = $0 { return true }; return false
+                    }
 
                     if !appResults.isEmpty {
                         Section(header: sectionHeader("Apps")) {
@@ -136,6 +139,22 @@ struct OverlayView: View {
                     if !folderResults.isEmpty {
                         Section(header: sectionHeader("Folders")) {
                             ForEach(Array(folderResults.enumerated()), id: \.element.id) { (_, result) in
+                                let globalIdx = viewModel.results.firstIndex(of: result) ?? 0
+                                SearchResultRow(
+                                    result: result,
+                                    isSelected: globalIdx == viewModel.selectedIndex
+                                )
+                                .id(result.id)
+                                .onTapGesture { viewModel.activate(result) }
+                                .onHover { if $0 { viewModel.select(at: globalIdx) } }
+                            }
+                        }
+                    }
+
+                    // "Open in menu bar →" fallback rows — always last, visually de-emphasized
+                    if !revealResults.isEmpty {
+                        Section(header: sectionHeader("Open in Menu Bar")) {
+                            ForEach(Array(revealResults.enumerated()), id: \.element.id) { (_, result) in
                                 let globalIdx = viewModel.results.firstIndex(of: result) ?? 0
                                 SearchResultRow(
                                     result: result,

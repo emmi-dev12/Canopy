@@ -46,6 +46,13 @@ struct SearchResultRow: View {
                     .font(.system(size: 11))
                     .foregroundStyle(.tertiary)
             }
+
+            // Arrow indicator for reveal fallback — signals "this opens the app"
+            if case .reveal = result {
+                Image(systemName: "arrow.up.forward")
+                    .font(.system(size: 11, weight: .medium))
+                    .foregroundStyle(.secondary)
+            }
         }
         .padding(.horizontal, 12)
         .frame(height: rowHeight)
@@ -57,6 +64,7 @@ struct SearchResultRow: View {
                 .padding(.horizontal, 6)
         )
         .contentShape(Rectangle())  // makes entire row hittable
+        .opacity(rowOpacity)
     }
 
     // MARK: - Icon
@@ -81,16 +89,23 @@ struct SearchResultRow: View {
 
     private var symbolColor: Color {
         switch result {
-        case .action: return .secondary
-        case .folder: return .blue
-        case .app:    return .secondary
+        case .action:  return .secondary
+        case .folder:  return .blue
+        case .app:     return .secondary
+        case .reveal:  return .orange
         }
     }
 
     private var rowHeight: CGFloat {
         switch result {
-        case .app, .folder: return 44
-        case .action:       return 36
+        case .app, .folder, .reveal: return 44
+        case .action:                return 36
         }
+    }
+
+    /// Reveal rows are visually de-emphasized so they read as "last resort" not "primary action"
+    private var rowOpacity: Double {
+        if case .reveal = result { return 0.75 }
+        return 1.0
     }
 }
