@@ -10,7 +10,7 @@
 # Requirements: Xcode 15+ installed (not just Command Line Tools)
 # ──────────────────────────────────────────────────────────────────────────────
 
-.PHONY: all build install uninstall clean run open check-xcode
+.PHONY: all build install uninstall clean run open check-xcode help
 
 APP       := Canopy
 PROJECT   := Canopy.xcodeproj
@@ -30,6 +30,18 @@ endif
 
 # ── Default ────────────────────────────────────────────────────────────────────
 all: install
+
+# ── Help ───────────────────────────────────────────────────────────────────────
+help:
+	@echo ""
+	@echo "  Canopy — macOS Menubar Search & Organizer"
+	@echo ""
+	@echo "  make install     Build and install to /Applications   ← start here"
+	@echo "  make open        Open the installed app"
+	@echo "  make run         Build and launch without installing"
+	@echo "  make uninstall   Remove from /Applications"
+	@echo "  make clean       Delete build artefacts"
+	@echo ""
 
 # ── Preflight check ────────────────────────────────────────────────────────────
 check-xcode:
