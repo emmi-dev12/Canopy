@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!--
+		Sandboxing is DISABLED.
+
+		Canopy requires:
+		- CGEventTap (cross-process key interception) — blocked by sandbox
+		- AXUIElement cross-process access — blocked by sandbox
+		- Activation of other apps — blocked by sandbox
+
+		For notarization without sandbox, Apple requires Hardened Runtime.
+		Add the following entitlements for Hardened Runtime compatibility:
+	-->
+
+	<!-- Hardened Runtime — required for notarization without sandbox -->
+	<key>com.apple.security.cs.allow-jit</key>
+	<false/>
+	<key>com.apple.security.cs.allow-unsigned-executable-memory</key>
+	<false/>
+	<key>com.apple.security.cs.disable-library-validation</key>
+	<false/>
+
+	<!-- No sandbox -->
+	<key>com.apple.security.app-sandbox</key>
+	<false/>
+</dict>
+</plist>

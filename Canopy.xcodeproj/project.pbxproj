@@ -1,0 +1,563 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA000001 /* CanopyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000001 /* CanopyApp.swift */; };
+		AA000002 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000002 /* AppDelegate.swift */; };
+		AA000003 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000003 /* AppEnvironment.swift */; };
+		AA000004 /* MenubarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000004 /* MenubarApp.swift */; };
+		AA000005 /* NormalizedMenuAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000005 /* NormalizedMenuAction.swift */; };
+		AA000006 /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000006 /* SearchResult.swift */; };
+		AA000007 /* AppFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000007 /* AppFolder.swift */; };
+		AA000008 /* UsageEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000008 /* UsageEvent.swift */; };
+		AA000009 /* AXHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000009 /* AXHelpers.swift */; };
+		AA00000A /* SmartMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB00000A /* SmartMatcher.swift */; };
+		AA00000B /* DecayCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB00000B /* DecayCalculator.swift */; };
+		AA00000C /* NSImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB00000C /* NSImage+Resize.swift */; };
+		AA00000D /* RunningAppsMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB00000D /* RunningAppsMonitor.swift */; };
+		AA00000E /* MenubarPresenceChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB00000E /* MenubarPresenceChecker.swift */; };
+		AA00000F /* AppDiscoveryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB00000F /* AppDiscoveryService.swift */; };
+		AA000010 /* AccessibilityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000010 /* AccessibilityService.swift */; };
+		AA000011 /* MenuItemEnumerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000011 /* MenuItemEnumerator.swift */; };
+		AA000012 /* MenuItemNormalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000012 /* MenuItemNormalizer.swift */; };
+		AA000013 /* MenuItemActivator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000013 /* MenuItemActivator.swift */; };
+		AA000014 /* HotkeyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000014 /* HotkeyService.swift */; };
+		AA000015 /* SearchEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000015 /* SearchEngine.swift */; };
+		AA000016 /* RankingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000016 /* RankingService.swift */; };
+		AA000017 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000017 /* PersistenceController.swift */; };
+		AA000018 /* UsageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000018 /* UsageStore.swift */; };
+		AA000019 /* FolderStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000019 /* FolderStore.swift */; };
+		AA00001A /* OverlayWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB00001A /* OverlayWindowController.swift */; };
+		AA00001B /* OverlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB00001B /* OverlayViewModel.swift */; };
+		AA00001C /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB00001C /* OverlayView.swift */; };
+		AA00001D /* SearchResultRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB00001D /* SearchResultRow.swift */; };
+		AA00001E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB00001E /* SettingsView.swift */; };
+		AA00001F /* FolderManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB00001F /* FolderManagerView.swift */; };
+		AA000020 /* HotkeyRecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000020 /* HotkeyRecorderView.swift */; };
+		AA000021 /* PermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000021 /* PermissionsView.swift */; };
+		AA000022 /* StatusItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000022 /* StatusItemController.swift */; };
+		AA000023 /* StatusMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000023 /* StatusMenuView.swift */; };
+		AA000024 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB000024 /* Info.plist */; };
+		AA000025 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB000025 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		BB000001 /* CanopyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanopyApp.swift; sourceTree = "<group>"; };
+		BB000002 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		BB000003 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
+		BB000004 /* MenubarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenubarApp.swift; sourceTree = "<group>"; };
+		BB000005 /* NormalizedMenuAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalizedMenuAction.swift; sourceTree = "<group>"; };
+		BB000006 /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
+		BB000007 /* AppFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFolder.swift; sourceTree = "<group>"; };
+		BB000008 /* UsageEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageEvent.swift; sourceTree = "<group>"; };
+		BB000009 /* AXHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AXHelpers.swift; sourceTree = "<group>"; };
+		BB00000A /* SmartMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartMatcher.swift; sourceTree = "<group>"; };
+		BB00000B /* DecayCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecayCalculator.swift; sourceTree = "<group>"; };
+		BB00000C /* NSImage+Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Resize.swift"; sourceTree = "<group>"; };
+		BB00000D /* RunningAppsMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningAppsMonitor.swift; sourceTree = "<group>"; };
+		BB00000E /* MenubarPresenceChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenubarPresenceChecker.swift; sourceTree = "<group>"; };
+		BB00000F /* AppDiscoveryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDiscoveryService.swift; sourceTree = "<group>"; };
+		BB000010 /* AccessibilityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityService.swift; sourceTree = "<group>"; };
+		BB000011 /* MenuItemEnumerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemEnumerator.swift; sourceTree = "<group>"; };
+		BB000012 /* MenuItemNormalizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemNormalizer.swift; sourceTree = "<group>"; };
+		BB000013 /* MenuItemActivator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemActivator.swift; sourceTree = "<group>"; };
+		BB000014 /* HotkeyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeyService.swift; sourceTree = "<group>"; };
+		BB000015 /* SearchEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchEngine.swift; sourceTree = "<group>"; };
+		BB000016 /* RankingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingService.swift; sourceTree = "<group>"; };
+		BB000017 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		BB000018 /* UsageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageStore.swift; sourceTree = "<group>"; };
+		BB000019 /* FolderStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderStore.swift; sourceTree = "<group>"; };
+		BB00001A /* OverlayWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayWindowController.swift; sourceTree = "<group>"; };
+		BB00001B /* OverlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayViewModel.swift; sourceTree = "<group>"; };
+		BB00001C /* OverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
+		BB00001D /* SearchResultRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultRow.swift; sourceTree = "<group>"; };
+		BB00001E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		BB00001F /* FolderManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderManagerView.swift; sourceTree = "<group>"; };
+		BB000020 /* HotkeyRecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeyRecorderView.swift; sourceTree = "<group>"; };
+		BB000021 /* PermissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsView.swift; sourceTree = "<group>"; };
+		BB000022 /* StatusItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemController.swift; sourceTree = "<group>"; };
+		BB000023 /* StatusMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusMenuView.swift; sourceTree = "<group>"; };
+		BB000024 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BB000025 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BB000026 /* Canopy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Canopy.entitlements; sourceTree = "<group>"; };
+		BB000027 /* Canopy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Canopy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CC000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DD000001 /* / */ = {
+			isa = PBXGroup;
+			children = (
+				DD000002 /* Canopy */,
+				DD000010 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DD000002 /* Canopy */ = {
+			isa = PBXGroup;
+			children = (
+				DD000003 /* App */,
+				DD000004 /* Models */,
+				DD000005 /* Utilities */,
+				DD000006 /* Services */,
+				DD000008 /* Persistence */,
+				DD000009 /* Features */,
+				DD00000B /* Resources */,
+			);
+			path = Canopy;
+			sourceTree = "<group>";
+		};
+		DD000003 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				BB000001 /* CanopyApp.swift */,
+				BB000002 /* AppDelegate.swift */,
+				BB000003 /* AppEnvironment.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		DD000004 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BB000004 /* MenubarApp.swift */,
+				BB000005 /* NormalizedMenuAction.swift */,
+				BB000006 /* SearchResult.swift */,
+				BB000007 /* AppFolder.swift */,
+				BB000008 /* UsageEvent.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		DD000005 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				BB000009 /* AXHelpers.swift */,
+				BB00000A /* SmartMatcher.swift */,
+				BB00000B /* DecayCalculator.swift */,
+				BB00000C /* NSImage+Resize.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		DD000006 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				DD000007 /* AppDiscovery */,
+				DD00000C /* Accessibility */,
+				BB000014 /* HotkeyService.swift */,
+				BB000015 /* SearchEngine.swift */,
+				BB000016 /* RankingService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		DD000007 /* AppDiscovery */ = {
+			isa = PBXGroup;
+			children = (
+				BB00000D /* RunningAppsMonitor.swift */,
+				BB00000E /* MenubarPresenceChecker.swift */,
+				BB00000F /* AppDiscoveryService.swift */,
+			);
+			path = AppDiscovery;
+			sourceTree = "<group>";
+		};
+		DD00000C /* Accessibility */ = {
+			isa = PBXGroup;
+			children = (
+				BB000010 /* AccessibilityService.swift */,
+				BB000011 /* MenuItemEnumerator.swift */,
+				BB000012 /* MenuItemNormalizer.swift */,
+				BB000013 /* MenuItemActivator.swift */,
+			);
+			path = Accessibility;
+			sourceTree = "<group>";
+		};
+		DD000008 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				BB000017 /* PersistenceController.swift */,
+				BB000018 /* UsageStore.swift */,
+				BB000019 /* FolderStore.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		DD000009 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				DD00000D /* Overlay */,
+				DD00000E /* Settings */,
+				DD00000F /* Menubar */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		DD00000D /* Overlay */ = {
+			isa = PBXGroup;
+			children = (
+				BB00001A /* OverlayWindowController.swift */,
+				BB00001B /* OverlayViewModel.swift */,
+				BB00001C /* OverlayView.swift */,
+				BB00001D /* SearchResultRow.swift */,
+			);
+			path = Overlay;
+			sourceTree = "<group>";
+		};
+		DD00000E /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				BB00001E /* SettingsView.swift */,
+				BB00001F /* FolderManagerView.swift */,
+				BB000020 /* HotkeyRecorderView.swift */,
+				BB000021 /* PermissionsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		DD00000F /* Menubar */ = {
+			isa = PBXGroup;
+			children = (
+				BB000022 /* StatusItemController.swift */,
+				BB000023 /* StatusMenuView.swift */,
+			);
+			path = Menubar;
+			sourceTree = "<group>";
+		};
+		DD00000B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BB000024 /* Info.plist */,
+				BB000025 /* Assets.xcassets */,
+				BB000026 /* Canopy.entitlements */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		DD000010 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BB000027 /* Canopy.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EE000001 /* Canopy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FF000002 /* Build configuration list for PBXNativeTarget "Canopy" */;
+			buildPhases = (
+				EE000002 /* Sources */,
+				CC000001 /* Frameworks */,
+				EE000003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Canopy;
+			productName = Canopy;
+			productReference = BB000027 /* Canopy.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FF000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					EE000001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = FF000001A /* Build configuration list for PBXProject "Canopy" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DD000001;
+			productRefGroup = DD000010 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EE000001 /* Canopy */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EE000003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA000025 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EE000002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA000001 /* CanopyApp.swift in Sources */,
+				AA000002 /* AppDelegate.swift in Sources */,
+				AA000003 /* AppEnvironment.swift in Sources */,
+				AA000004 /* MenubarApp.swift in Sources */,
+				AA000005 /* NormalizedMenuAction.swift in Sources */,
+				AA000006 /* SearchResult.swift in Sources */,
+				AA000007 /* AppFolder.swift in Sources */,
+				AA000008 /* UsageEvent.swift in Sources */,
+				AA000009 /* AXHelpers.swift in Sources */,
+				AA00000A /* SmartMatcher.swift in Sources */,
+				AA00000B /* DecayCalculator.swift in Sources */,
+				AA00000C /* NSImage+Resize.swift in Sources */,
+				AA00000D /* RunningAppsMonitor.swift in Sources */,
+				AA00000E /* MenubarPresenceChecker.swift in Sources */,
+				AA00000F /* AppDiscoveryService.swift in Sources */,
+				AA000010 /* AccessibilityService.swift in Sources */,
+				AA000011 /* MenuItemEnumerator.swift in Sources */,
+				AA000012 /* MenuItemNormalizer.swift in Sources */,
+				AA000013 /* MenuItemActivator.swift in Sources */,
+				AA000014 /* HotkeyService.swift in Sources */,
+				AA000015 /* SearchEngine.swift in Sources */,
+				AA000016 /* RankingService.swift in Sources */,
+				AA000017 /* PersistenceController.swift in Sources */,
+				AA000018 /* UsageStore.swift in Sources */,
+				AA000019 /* FolderStore.swift in Sources */,
+				AA00001A /* OverlayWindowController.swift in Sources */,
+				AA00001B /* OverlayViewModel.swift in Sources */,
+				AA00001C /* OverlayView.swift in Sources */,
+				AA00001D /* SearchResultRow.swift in Sources */,
+				AA00001E /* SettingsView.swift in Sources */,
+				AA00001F /* FolderManagerView.swift in Sources */,
+				AA000020 /* HotkeyRecorderView.swift in Sources */,
+				AA000021 /* PermissionsView.swift in Sources */,
+				AA000022 /* StatusItemController.swift in Sources */,
+				AA000023 /* StatusMenuView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		FF000010 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_CYCLE = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		FF000011 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_CYCLE = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		FF000012 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Canopy/Resources/Canopy.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Canopy/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.canopy.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+			};
+			name = Debug;
+		};
+		FF000013 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Canopy/Resources/Canopy.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Canopy/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.canopy.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FF000001A /* Build configuration list for PBXProject "Canopy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF000010 /* Debug */,
+				FF000011 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FF000002 /* Build configuration list for PBXNativeTarget "Canopy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF000012 /* Debug */,
+				FF000013 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = FF000001 /* Project object */;
+}
