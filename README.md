@@ -233,6 +233,19 @@ AX hierarchy depth varies significantly across applications.
 
 ## 🚀 Install
 
+### Option A — Download (recommended)
+
+1. Go to the [**Releases**](https://github.com/emmi-dev12/Canopy/releases/latest) page
+2. Download **Canopy.zip**
+3. Unzip and drag **Canopy.app** to `/Applications`
+4. Open it — macOS may show a security prompt on first launch; go to **System Settings → Privacy & Security** and click **Open Anyway**
+
+No Xcode, no build tools required.
+
+### Option B — Build from source
+
+> Requires **macOS 13+** and **Xcode 15+**
+
 ```bash
 git clone https://github.com/emmi-dev12/Canopy.git
 cd Canopy
