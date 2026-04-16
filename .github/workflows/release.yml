@@ -1,0 +1,51 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version (e.g. v1.0.0)'
+        required: true
+        default: 'v1.0.0'
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build
+        run: |
+          xcodebuild \
+            -project Canopy.xcodeproj \
+            -scheme Canopy \
+            -configuration Release \
+            -derivedDataPath .build \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            DEVELOPMENT_TEAM="" \
+            build
+
+      - name: Sign (ad-hoc)
+        run: |
+          codesign --force --deep --sign - \
+            .build/Build/Products/Release/Canopy.app
+
+      - name: Zip
+        run: |
+          cd .build/Build/Products/Release
+          zip -r ../../../../Canopy.zip Canopy.app
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.inputs.version || github.ref_name }}
+          name: ${{ github.event.inputs.version || github.ref_name }}
+          files: Canopy.zip
+          generate_release_notes: true
