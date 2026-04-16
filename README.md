@@ -1,41 +1,237 @@
-# Canopy
+# 🧭 Canopy
 
-**Your menubar, searchable.**
+**A keyboard-first command layer for macOS menubar apps.**
 
-Canopy is a native macOS app that puts a Spotlight-style search overlay on top of your menubar apps. Press a hotkey, type what you want, and either launch an app or trigger one of its actions directly — without touching the mouse.
+Canopy turns your menubar into a searchable, actionable interface. Instead of hunting through icons or opening apps manually, you invoke a Spotlight-style overlay, type intent-based commands, and execute app actions directly.
 
-```
-⌥Space  →  "wifi off"  →  Wi-Fi turns off
-⌥Space  →  "1pass"     →  1Password opens
-⌥Space  →  "cal"       →  Calendar activates
-```
-
-It also lets you organise menubar apps into named folders, so you can hide the clutter without losing access.
+It bridges the gap between:
+- launching apps
+- controlling apps
+- and interacting with menubar utilities
 
 ---
 
-## Features
+## ⚡ Example usage
 
-**Instant actions**
-Type what you want to do, not which app to open. Canopy reads your menubar apps' menus via the macOS Accessibility API and surfaces actions as first-class search results. "wifi off", "bluetooth on", "do not disturb" — done in one keystroke.
+```
+⌥ Space → "wifi off"    → Wi-Fi disabled
+⌥ Space → "1pass"       → 1Password opens
+⌥ Space → "cal today"   → Calendar focused
+```
 
-**Smart suggestions**
-Results get smarter the more you use Canopy. A time-decay algorithm (14-day half-life) surfaces your most-used apps and actions first, and remembers what you picked last time you typed the same query.
-
-**Reveal fallback**
-When Canopy can't read an app's menu (Electron apps, obscure tools, anything that blocks Accessibility), it still shows an "Open in menu bar →" result that brings the app to focus. Something useful always happens.
-
-**Virtual folders**
-Group menubar apps into named folders — Productivity, Media, Dev, whatever you like. Folders appear in the overlay and let you drill in to find and launch apps without them cluttering the system menubar itself.
-
-**Keyboard-first**
-Arrow keys to navigate, Return to activate, Escape to dismiss. Canopy never steals focus from your current app.
+Canopy is designed around **intent, not navigation**.
 
 ---
 
-## Install
+## 🧠 Core idea
 
-> Requires **macOS 13+** and **Xcode 15+** (free from the App Store).
+macOS menubar apps expose functionality through:
+- menu items
+- accessibility trees
+- app activation states
+
+Canopy converts those fragmented interfaces into a single searchable action layer.
+
+Instead of:
+> "Open app → find menu → click action"
+
+You do:
+> "Type intent → execute action"
+
+---
+
+## ✨ Features
+
+### 🔎 Intent-based action search
+
+Canopy indexes:
+- running menubar apps
+- their Accessibility menu structures (`AXUIElement`)
+
+It exposes actions as searchable commands:
+- `"wifi off"`
+- `"bluetooth on"`
+- `"do not disturb"`
+- `"mute"`
+
+Actions are ranked by semantic match + usage history.
+
+### 🧠 Adaptive ranking system
+
+Results are ordered using a hybrid scoring model:
+- usage frequency
+- recency (time-decay weighting, ~14-day half-life)
+- query-context similarity
+- last-selected bias
+
+This allows Canopy to "learn" user behavior without explicit configuration.
+
+### 📁 Virtual folders
+
+Users can group menubar apps into logical namespaces:
+- Productivity
+- Media
+- Dev
+- Comms
+
+Folders act as both:
+- visual filters
+- searchable scopes
+
+### 🪶 Reveal fallback mode
+
+Not all apps expose usable Accessibility trees (notably Electron apps).
+
+When action extraction fails, Canopy falls back to:
+> "Focus app → bring into foreground"
+
+This guarantees a meaningful result always exists, even in degraded conditions.
+
+### ⌨️ Keyboard-first UX
+
+Canopy is designed to never interrupt workflow:
+
+| Key | Action |
+|-----|--------|
+| ⌥ Space | Open overlay |
+| ↑ / ↓ | Navigate results |
+| Return | Execute |
+| Escape | Dismiss |
+
+No mouse interaction required.
+
+---
+
+## 🏗 Architecture overview
+
+Canopy is built as a single macOS application target with modular services:
+
+```
+App/
+  Entry point, AppEnvironment, dependency wiring
+
+Models/
+  MenubarApp
+  SearchResult
+  AppFolder
+  NormalizedMenuAction
+
+Services/
+  AppDiscovery
+    - detects menubar-capable apps via NSRunningApplication heuristics
+
+  Accessibility
+    - AXUIElement traversal
+    - menu normalization
+    - action execution layer
+
+  SearchEngine
+    - in-memory inverted index
+    - <100ms query target
+
+  RankingService
+    - decay-weighted scoring model
+    - usage feedback loop
+
+  HotkeyService
+    - CGEventTap primary
+    - Carbon fallback for compatibility
+
+Persistence/
+  JSON-based storage in:
+  ~/Library/Application Support/Canopy/
+
+Features/
+  Overlay
+    - NSPanel (.nonactivatingPanel)
+    - SwiftUI search interface
+
+  Settings
+    - hotkey config
+    - folder management
+
+  Menubar
+    - NSStatusItem integration
+```
+
+---
+
+## ⚙️ Key design decisions
+
+### 1. Non-activating overlay window
+
+The search UI is implemented as:
+- `NSPanel`
+- `.nonactivatingPanel`
+- `.popUpMenu` level
+
+This ensures:
+- no focus stealing
+- seamless overlay behavior
+- uninterrupted typing in background apps
+
+### 2. Asynchronous Accessibility traversal
+
+AX queries are:
+- offloaded via `Task.detached`
+- cached in-memory
+- never executed on main thread
+
+This prevents UI blocking during:
+- slow apps
+- broken AX trees
+- large menu hierarchies
+
+### 3. JSON-based persistence
+
+No Core Data or external database.
+
+Stored data includes:
+- usage frequency
+- folder mappings
+- hotkey preferences
+
+Located in:
+```
+~/Library/Application Support/Canopy/
+```
+
+---
+
+## 🔐 Permissions model
+
+Canopy requires elevated system access:
+
+| Permission | Purpose |
+|------------|---------|
+| Accessibility | Read and execute app menu actions via AXUIElement |
+| Input Monitoring | Global hotkey capture via CGEventTap |
+| Apple Events | Activate and focus external apps |
+
+Canopy is **not sandboxed**, as sandboxing prevents:
+- cross-process AX access
+- CGEventTap usage
+
+This is consistent with tools like Alfred and Raycast.
+
+---
+
+## ⚠️ Known limitations
+
+**Accessibility API inconsistency**
+Not all apps expose reliable AX structures:
+- Electron apps often partially fail
+- some menu items are dynamic or hidden
+
+**Hotkey reliability fallback**
+Input Monitoring may degrade to Carbon-based event handling on some systems.
+
+**Menu traversal variability**
+AX hierarchy depth varies significantly across applications.
+
+---
+
+## 🚀 Install
 
 ```bash
 git clone https://github.com/emmi-dev12/Canopy.git
@@ -43,96 +239,43 @@ cd Canopy
 make install
 ```
 
-That's it. `make install` builds a Release binary, copies it to `/Applications`, and ad-hoc signs it for local use.
-
-### First launch
-
-After installation, Canopy needs two permissions to work fully:
-
-1. **Open Canopy** from Launchpad (or run `make open`)
-2. Go to **System Settings → Privacy & Security**
-3. Under **Accessibility** — enable Canopy
-4. Under **Input Monitoring** — enable Canopy
-5. Press **⌥Space** anywhere to open the overlay
-
-Without Accessibility, Canopy shows app names only (no action search).  
-Without Input Monitoring, the hotkey falls back to a less reliable Carbon shortcut; you can always click Canopy's menubar icon instead.
+Builds and installs to: `/Applications/Canopy.app`
 
 ---
 
-## Usage
+## 🧪 Make targets
 
-| Action | How |
-|--------|-----|
-| Open overlay | ⌥Space (default) |
-| Navigate results | ↑ / ↓ arrows |
-| Activate selection | Return |
-| Dismiss | Escape |
-| Change hotkey | Right-click Canopy's menubar icon → Settings |
-| Manage folders | Right-click → Settings → Folders |
-
-**Search tips**
-- Short abbreviations work: `"cal"` → Calendar, `"1p"` → 1Password
-- Action phrases work: `"wifi off"`, `"bt on"`, `"dnd"`, `"mute"`
-- Folder names are searchable too
+| Command | Description |
+|---------|-------------|
+| `make run` | Build and run locally |
+| `make install` | Build + install to /Applications |
+| `make open` | Launch installed app |
+| `make uninstall` | Remove from /Applications |
+| `make clean` | Remove build artifacts |
 
 ---
 
-## Other make targets
+## 💡 Why Canopy exists
 
-```bash
-make run        # Build and launch from .build/ (skips /Applications install)
-make open       # Open the already-installed app
-make uninstall  # Remove Canopy from /Applications
-make clean      # Delete the .build/ folder
-make help       # Print all targets
-```
+macOS menubar apps are powerful but fragmented.
 
----
+Canopy reduces that fragmentation by introducing:
+> a single, intent-driven command surface for all menubar utilities
 
-## Building & architecture
+It replaces:
+- visual scanning
+- menu hunting
+- app switching
 
-The project is a single Xcode target — no dependencies, no package manager.
-
-```
-Canopy/
-├── App/               Entry point, AppDelegate, dependency wiring (AppEnvironment)
-├── Models/            MenubarApp, NormalizedMenuAction, SearchResult, AppFolder
-├── Services/
-│   ├── AppDiscovery/  Finds running apps with menubar presence (NSRunningApplication heuristics)
-│   ├── Accessibility/ AXUIElement traversal, action normalisation, activation
-│   ├── HotkeyService  CGEventTap + Carbon fallback
-│   ├── SearchEngine   In-memory search index, <100 ms query guarantee
-│   └── RankingService Decay-weighted scoring + query-context boosting
-├── Persistence/       JSON-based (no Core Data) — usage scores, folders, hotkey prefs
-├── Features/
-│   ├── Overlay/       NSPanel controller + SwiftUI search UI
-│   ├── Settings/      Preferences window, folder manager, hotkey recorder
-│   └── Menubar/       Canopy's own NSStatusItem
-└── Utilities/         SmartMatcher, DecayCalculator, AXHelpers
-```
-
-**Key design decisions**
-
-- The overlay is an `NSPanel` at `.popUpMenu` window level with `.nonactivatingPanel` — it never steals focus.
-- AX enumeration runs off the main thread (`Task.detached`) and results are cached in-memory. Search never blocks on AX.
-- Persistence uses plain JSON files in `~/Library/Application Support/Canopy/` — no Core Data tooling required.
-- Services are protocol-injected so `SearchEngine` and `RankingService` are unit-testable without the full app graph.
+with:
+- direct action execution
 
 ---
 
-## Permissions explained
+## 🧭 Design philosophy
 
-| Permission | Why Canopy needs it |
-|------------|---------------------|
-| Accessibility | Read menu items from other apps via AXUIElement |
-| Input Monitoring | Intercept the global hotkey with CGEventTap |
-| Apple Events | Activate other apps when triggering menu actions |
-
-Canopy is **not sandboxed** — sandboxing blocks CGEventTap and cross-process AX access, which are both essential. This is consistent with similar tools (Bartender, Alfred, Raycast).
-
----
-
-## License
-
-MIT
+- Optimize for **intent**, not navigation
+- Prefer **speed** over configurability
+- **Fail gracefully** rather than silently
+- Keep interaction fully **keyboard-driven**
+- Avoid focus disruption at all costs
