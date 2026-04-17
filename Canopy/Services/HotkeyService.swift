@@ -59,7 +59,7 @@ final class HotkeyService {
         let mask = CGEventMask(1 << CGEventType.keyDown.rawValue)
 
         // We need a C-compatible callback — use an unmanaged self pointer
-        let selfPtr = Unmanaged.passRetained(self).toOpaque()
+        let selfPtr = Unmanaged.passUnretained(self).toOpaque()
 
         let tap = CGEvent.tapCreate(
             tap: .cgSessionEventTap,
@@ -76,7 +76,6 @@ final class HotkeyService {
 
         guard let tap else {
             // CGEventTap failed — likely Input Monitoring not granted
-            Unmanaged<HotkeyService>.fromOpaque(selfPtr).release()
             NotificationCenter.default.post(name: .canopyInputMonitoringUnavailable, object: nil)
             return false
         }

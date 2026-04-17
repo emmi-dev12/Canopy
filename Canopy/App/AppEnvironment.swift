@@ -19,6 +19,7 @@ final class AppEnvironment: ObservableObject {
     let discovery: AppDiscoveryService
     let searchEngine: SearchEngine
     let hotkeyService: HotkeyService
+    let overlayViewModel: OverlayViewModel
     let overlayController: OverlayWindowController
     let statusItemController: StatusItemController
 
@@ -39,11 +40,11 @@ final class AppEnvironment: ObservableObject {
 
         // OverlayViewModel needs searchEngine and rankingService — build it first,
         // then pass it into OverlayWindowController.
-        let viewModel = OverlayViewModel(searchEngine: searchEngine, rankingService: rankingService)
-        overlayController = OverlayWindowController(viewModel: viewModel)
+        overlayViewModel = OverlayViewModel(searchEngine: searchEngine, rankingService: rankingService)
+        overlayController = OverlayWindowController(viewModel: overlayViewModel)
 
         // Dismiss callback
-        viewModel.onDismiss = { [weak self] in
+        overlayViewModel.onDismiss = { [weak self] in
             Task { @MainActor in self?.overlayController.hide() }
         }
     }
