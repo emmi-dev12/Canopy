@@ -198,7 +198,7 @@ struct OverlayView: View {
             Image(systemName: "magnifyingglass")
                 .font(.system(size: 32))
                 .foregroundStyle(.tertiary)
-            Text(viewModel.query.isEmpty ? "Start typing to search" : "No results for "\(viewModel.query)"")
+            Text(viewModel.query.isEmpty ? "Start typing to search" : "No results for \"\(viewModel.query)\"")
                 .font(.system(size: 14))
                 .foregroundStyle(.secondary)
         }

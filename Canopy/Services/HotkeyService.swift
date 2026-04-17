@@ -138,7 +138,8 @@ final class HotkeyService {
         // Install a Carbon event handler to receive the hotkey event
         var eventSpec = EventTypeSpec(eventClass: OSType(kEventClassKeyboard),
                                       eventKind: UInt32(kEventHotKeyPressed))
-        InstallApplicationEventHandler(
+        InstallEventHandler(
+            GetApplicationEventTarget(),
             { _, event, refcon -> OSStatus in
                 guard let refcon else { return OSStatus(eventNotHandledErr) }
                 let service = Unmanaged<HotkeyService>.fromOpaque(refcon).takeUnretainedValue()

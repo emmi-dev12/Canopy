@@ -68,7 +68,7 @@ struct HotkeyRecorderView: View {
            let data = TISGetInputSourceProperty(src, kTISPropertyUnicodeKeyLayoutData) {
             let layout = unsafeBitCast(data, to: CFData.self)
             let ptr = CFDataGetBytePtr(layout)
-            let keyLayout = ptr?.bindMemory(to: UCKeyboardLayout.self, capacity: 1)
+            let keyLayout = ptr.map { UnsafeRawPointer($0).bindMemory(to: UCKeyboardLayout.self, capacity: 1) }
             UCKeyTranslate(
                 keyLayout, code, UInt16(kUCKeyActionDisplay),
                 0, UInt32(LMGetKbdType()), OptionBits(kUCKeyTranslateNoDeadKeysBit),

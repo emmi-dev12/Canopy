@@ -144,9 +144,9 @@ private struct FolderDetailView: View {
                             .font(.system(size: 12))
                     } else {
                         ForEach(memberApps) { app in
-                            AppRow(app: app) {
+                            AppRow(app: app, removeAction: {
                                 folderStore.removeApp(app.bundleIdentifier, from: folder.id)
-                            } addAction: nil
+                            }, addAction: nil)
                         }
                     }
                 }

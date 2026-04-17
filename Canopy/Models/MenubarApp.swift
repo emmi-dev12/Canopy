@@ -14,8 +14,7 @@ struct MenubarApp: Identifiable, Hashable {
     init(from app: NSRunningApplication, folderID: UUID? = nil, usageScore: Double = 0) {
         // Use bundle ID if available; fall back to process name + pid for system components
         let bid = app.bundleIdentifier
-            ?? app.executableURL?.deletingPathExtension().lastPathComponent.lowercased()
-            .map { "proc.\($0)" }
+            ?? app.executableURL.map { "proc.\($0.deletingPathExtension().lastPathComponent.lowercased())" }
             ?? "pid.\(app.processIdentifier)"
         self.bundleIdentifier = bid
         // Deterministic UUID derived from bundle identifier so the id is stable within a session
