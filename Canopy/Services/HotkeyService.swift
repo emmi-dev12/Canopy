@@ -13,6 +13,7 @@ final class HotkeyService {
     private var eventTap: CFMachPort?
     private var runLoopSource: CFRunLoopSource?
     private var carbonHotKeyRef: EventHotKeyRef?
+    private var carbonEventHandlerRef: EventHandlerRef?
     private var registeredKeyCode: UInt16 = 49      // Space
     private var registeredModifiers: NSEvent.ModifierFlags = [.option]
 
@@ -43,6 +44,10 @@ final class HotkeyService {
         if let ref = carbonHotKeyRef {
             UnregisterEventHotKey(ref)
             carbonHotKeyRef = nil
+        }
+        if let ref = carbonEventHandlerRef {
+            RemoveEventHandler(ref)
+            carbonEventHandlerRef = nil
         }
     }
 
@@ -149,7 +154,7 @@ final class HotkeyService {
             1,
             &eventSpec,
             Unmanaged.passUnretained(self).toOpaque(),
-            nil
+            &carbonEventHandlerRef
         )
     }
 }
