@@ -17,8 +17,7 @@ final class MenuItemActivator {
     /// Attempt to activate the action. The `app` is needed to find the AX element and optionally
     /// bring it to the front.
     func activate(_ action: NormalizedMenuAction, in app: MenubarApp) async throws {
-        guard let pid = app.pid else { throw ActivationError.appNotRunning }
-
+        let pid = app.pid
         let axApp = AXHelpers.applicationElement(for: pid)
 
         // Try direct activation first (doesn't steal focus)

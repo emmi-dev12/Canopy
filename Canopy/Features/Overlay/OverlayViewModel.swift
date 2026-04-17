@@ -147,7 +147,6 @@ final class OverlayViewModel: ObservableObject {
     // MARK: - Private helpers
 
     private func launchApp(_ app: MenubarApp) {
-        guard let pid = app.pid else { return }
         let running = NSRunningApplication.runningApplications(withBundleIdentifier: app.bundleIdentifier)
         if let ra = running.first {
             ra.activate(options: [.activateIgnoringOtherApps])
@@ -157,6 +156,5 @@ final class OverlayViewModel: ObservableObject {
                 configuration: NSWorkspace.OpenConfiguration()
             )
         }
-        _ = pid  // suppress unused warning — pid used as fallback check
     }
 }
