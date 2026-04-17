@@ -23,6 +23,7 @@ struct OverlayView: View {
         .frame(width: 620, height: 480)
         .shadow(color: .black.opacity(0.35), radius: 30, x: 0, y: 10)
         .onAppear { isSearchFocused = true }
+        .onChange(of: viewModel.focusGeneration) { _, _ in isSearchFocused = true }
         .onKeyPress(.escape) {
             viewModel.handleEscape()
             return .handled
@@ -65,9 +66,7 @@ struct OverlayView: View {
             }
 
             TextField(
-                viewModel.activeFolderFilter != nil
-                    ? "Search in \(viewModel.activeFolderFilter!.name)…"
-                    : "Search menubar apps…",
+                viewModel.activeFolderFilter.map { "Search in \($0.name)…" } ?? "Search menubar apps…",
                 text: $viewModel.query
             )
             .textFieldStyle(.plain)

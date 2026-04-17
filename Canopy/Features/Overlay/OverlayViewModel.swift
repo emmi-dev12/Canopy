@@ -12,6 +12,8 @@ final class OverlayViewModel: ObservableObject {
 
     /// Set when the user drills into a folder.
     @Published private(set) var activeFolderFilter: AppFolder? = nil
+    /// Incremented each time the overlay is about to be presented so the view can re-focus the search field.
+    @Published private(set) var focusGeneration: Int = 0
 
     private let searchEngine: SearchEngine
     private let rankingService: RankingService
@@ -41,6 +43,7 @@ final class OverlayViewModel: ObservableObject {
         query = ""
         activeFolderFilter = nil
         selectedIndex = 0
+        focusGeneration += 1
         runSearch(query: "")
     }
 

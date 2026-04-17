@@ -6,9 +6,12 @@ import Carbon.HIToolbox
 /// Strategy:
 /// - Primary: CGEventTap — works even without a focused window, requires Input Monitoring.
 /// - Fallback: Carbon RegisterEventHotKey — less powerful but no special permission needed.
-final class HotkeyService {
+final class HotkeyService: ObservableObject {
     /// Called on the main thread when the hotkey is pressed.
     var onActivate: (() -> Void)?
+
+    /// True when a CGEventTap is active (Input Monitoring was granted).
+    @Published private(set) var inputMonitoringGranted: Bool = false
 
     private var eventTap: CFMachPort?
     private var runLoopSource: CFRunLoopSource?
@@ -39,6 +42,7 @@ final class HotkeyService {
             }
             eventTap = nil
             runLoopSource = nil
+            inputMonitoringGranted = false
         }
         // Remove Carbon hotkey
         if let ref = carbonHotKeyRef {
@@ -76,6 +80,7 @@ final class HotkeyService {
 
         guard let tap else {
             // CGEventTap failed — likely Input Monitoring not granted
+            inputMonitoringGranted = false
             NotificationCenter.default.post(name: .canopyInputMonitoringUnavailable, object: nil)
             return false
         }
@@ -86,6 +91,7 @@ final class HotkeyService {
 
         self.eventTap = tap
         self.runLoopSource = src
+        inputMonitoringGranted = true
         return true
     }
 
