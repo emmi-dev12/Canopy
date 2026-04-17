@@ -28,6 +28,8 @@
 	<!-- Privacy usage descriptions -->
 	<key>NSAccessibilityUsageDescription</key>
 	<string>Canopy uses Accessibility to read and interact with menu items in other apps.</string>
+	<key>NSInputMonitoringUsageDescription</key>
+	<string>Canopy needs Input Monitoring to detect the global hotkey (⌥Space) from any app.</string>
 	<key>NSAppleEventsUsageDescription</key>
 	<string>Canopy may send Apple Events to activate other apps when triggering menu actions.</string>
 	<key>NSHumanReadableCopyright</key>

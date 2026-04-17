@@ -18,7 +18,7 @@ struct SettingsView: View {
             )
             .tabItem { Label("Folders", systemImage: "folder") }
 
-            PermissionsView(accessibility: environment.accessibility)
+            PermissionsView(accessibility: environment.accessibility, hotkeyService: environment.hotkeyService)
                 .tabItem { Label("Permissions", systemImage: "lock.shield") }
         }
         .frame(minWidth: 500, minHeight: 360)

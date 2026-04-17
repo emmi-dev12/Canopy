@@ -31,7 +31,6 @@ struct MenuItemNormalizer {
         guard !cleaned.isEmpty, !shouldSkip(cleaned) else { return nil }
 
         let enrichedPath = flatPath.map { clean($0) }.filter { !$0.isEmpty }
-        let searchableText = buildSearchableText(for: cleaned)
 
         return NormalizedMenuAction(
             displayTitle: cleaned,

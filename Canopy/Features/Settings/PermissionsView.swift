@@ -5,6 +5,7 @@ import AppKit
 /// Guides the user through granting both Accessibility and Input Monitoring.
 struct PermissionsView: View {
     @ObservedObject var accessibility: AccessibilityService
+    @ObservedObject var hotkeyService: HotkeyService
     @State private var showingInputMonitoringTip = false
 
     var body: some View {
@@ -45,7 +46,7 @@ struct PermissionsView: View {
                     icon: "keyboard",
                     title: "Input Monitoring",
                     description: "Lets Canopy respond to the global hotkey (⌥Space).",
-                    isGranted: false,       // checked at runtime when CGEventTap succeeds
+                    isGranted: hotkeyService.inputMonitoringGranted,
                     action: {
                         NSWorkspace.shared.open(
                             URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_ListenEvent")!
