@@ -4,13 +4,15 @@ import SwiftUI
 /// Manages the floating Spotlight-style search panel.
 ///
 /// The panel:
-/// - Uses `.nonactivatingPanel` so it never steals focus from the previously active app
+/// - Activates the app on show so it can receive keyboard events, then restores
+///   the previously-active app on dismiss
 /// - Sits at `.popUpMenu` window level — above virtually everything including the menubar
 /// - Joins all Spaces so it's always accessible regardless of the current desktop
 final class OverlayWindowController: NSWindowController {
     private weak var viewModel: OverlayViewModel?
     private var outsideClickMonitor: Any?
     private var isVisible = false
+    private var previousApp: NSRunningApplication?
 
     convenience init(viewModel: OverlayViewModel) {
         let panel = Self.makePanel()
@@ -26,9 +28,16 @@ final class OverlayWindowController: NSWindowController {
     func show() {
         guard !isVisible else { return }
         isVisible = true
+        // Remember who had focus so we can restore it on dismiss
+        previousApp = NSWorkspace.shared.frontmostApplication
         positionPanel()
         viewModel?.prepareForPresentation()
         window?.alphaValue = 0
+        // Activate the app so the panel can receive keyboard events.
+        // LSUIElement apps are never "active" by default; without this the
+        // panel appears on screen but the previously-active app still owns
+        // the key window and all keyboard input goes there instead.
+        NSApp.activate(ignoringOtherApps: true)
         window?.makeKeyAndOrderFront(nil)
         NSAnimationContext.runAnimationGroup { ctx in
             ctx.duration = 0.15
@@ -46,6 +55,9 @@ final class OverlayWindowController: NSWindowController {
             window?.animator().alphaValue = 0
         }, completionHandler: { [weak self] in
             self?.window?.orderOut(nil)
+            // Return focus to whatever the user was doing before
+            self?.previousApp?.activate(options: .activateIgnoringOtherApps)
+            self?.previousApp = nil
         })
         viewModel?.clearOnDismiss()
     }
