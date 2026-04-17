@@ -91,7 +91,7 @@ final class OverlayWindowController: NSWindowController {
         ) { [weak self] event in
             guard let self, let panel = self.window else { return }
             // If the click is outside the panel bounds, dismiss
-            let locationInScreen = event.locationInWindow
+            let locationInScreen = NSEvent.mouseLocation
             if !panel.frame.contains(locationInScreen) {
                 DispatchQueue.main.async { self.hide() }
             }
